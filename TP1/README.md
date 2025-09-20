@@ -1,4 +1,4 @@
-## TP1
+## TPC1
 Lara Lopes **a108655**
 
 ![Minha foto](https://i.imgur.com/JtfyAxS.png)
