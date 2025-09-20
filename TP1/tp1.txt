@@ -1,0 +1,9 @@
+^1*(0*010*)*0*$
+
+1*           -> começa com zero ou mais ocorrências de '1' 
+(0*010*)*    -> zero ou mais ocorrências do bloco:
+                 - cada bloco começa obrigatoriamente com '0'
+                 - pode ter mais de uma ocorrência de '0' antes do '1'
+                 - seguido de '1'
+                 - seguido de zero ou mais ocorrências de '0'
+0*           -> zero ou mais ocorrências de '0' no final da sequência
