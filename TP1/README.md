@@ -7,4 +7,4 @@ Indique uma expressão regular que represente strings binárias que não incluam
 
 
 
-[Resolução](tp1.txt)
+[Resolução](tpc1.txt)
