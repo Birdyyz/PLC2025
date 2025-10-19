@@ -1,26 +1,44 @@
 [
-    {
-        "cod": "A23",
-        "nome": "Água 0.5L",
-        "quant": 8,
-        "preco": 0.7
-    },
-    {
-        "cod": "A20",
-        "nome": "Kinder Bueno",
-        "quant": 10,
-        "preco": 1.5
-    },
-    {
-        "cod": "A06",
-        "nome": "Kit Kat",
-        "quant": 12,
-        "preco": 1.2
-    },
-    {
-        "cod": "A09",
-        "nome": "Compal",
-        "quant": 8,
-        "preco": 1.0
-    }
+  {
+    "cod": "A23",
+    "nome": "Água 0.5L",
+    "quantidade": 16,
+    "preco": 0.7
+  },
+  {
+    "cod": "A20",
+    "nome": "Kinder Bueno",
+    "quantidade": 10,
+    "preco": 1.5
+  },
+  {
+    "cod": "A06",
+    "nome": "Kit Kat",
+    "quantidade": 12,
+    "preco": 1.2
+  },
+  {
+    "cod": "A09",
+    "nome": "Compal",
+    "quantidade": 8,
+    "preco": 1.0
+  },
+  {
+    "cod": "A01",
+    "nome": "Nestle MultiFrutas",
+    "quantidade": 20,
+    "preco": 0.5
+  },
+  {
+    "cod": "A10",
+    "nome": "Monster",
+    "quantidade": 0,
+    "preco": 1.1
+  },
+  {
+    "cod": "A13",
+    "nome": "Twix",
+    "quantidade": 11,
+    "preco": 0.8
+  }
 ]
