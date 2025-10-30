@@ -4,19 +4,20 @@ tokens = ('PA','PF','INT','OP')
 
 t_PA= r'\('
 t_PF= r'\)'
-t_INT = r'[+\-]?\d+'
+t_INT = r'\d+'
 t_OP = r'[+\-*/]'
 
 
-# 3 + 5 * (10 - 2)
-# (8 / 4) + 7 - 2
-# 
-# P1: EXP -> INT OP EXP
-#          | PRIORIDADE OP EXP 
-#          | INT
-# P2: PRIORIDADE -> PA EXP PF
-#                  | ε
-
+# EXP   -> TERMO EXP2
+# EXP2  -> OP_SOMA TERMO EXP2 
+#         | ε
+# TERMO -> FATOR TERMO2
+# TERMO2 -> OP_MULT FATOR TERMO2 
+#          | ε
+# FATOR -> INT | PA EXP PF
+#
+# OP_SOMA -> + | -
+# OP_MULT -> * | /
 
 def t_newline(t):
     r'\n+'
