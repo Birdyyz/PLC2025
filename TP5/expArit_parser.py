@@ -10,38 +10,94 @@ prox_symb = None
 #P6:          | ε
 #P7: FATOR -> INT 
 #P8:          | PA EXP PF
-# OP_SOMA -> + 
-#           | -
-# OP_MULT -> * 
-#           | /
+# OP_SOMA -> + | -
+# OP_MULT -> * | /
 
-#EXP > TERMO > FATOR
 def parserError(symb):
-    print("Erro sintático, token inesperado: ", symb)
+    print("Erro sintático, token inesperado:", symb)
 
 def rec_term(symb):
     global prox_symb
-    if prox_symb.type == symb:
+    if prox_symb and prox_symb.type == symb:
         prox_symb = lexer.token()
     else:
         parserError(prox_symb)
-        prox_symb = ('erro', '', 0, 0)
+        prox_symb = None
 
 def fator():
     global prox_symb
-    if prox_symb.type == 'INT':
-        print("DERIVAR INT DE P7: FATOR -> INT ")
+    if prox_symb and prox_symb.type == 'INT':
+        print("Derivar P7: FATOR -> INT")
         rec_term('INT')
-        print("Reconheci INT DE P7: FATOR -> INT")
-    if prox_symb.type == 'PA':
-        print("DERIVAR PA DE P8: FATOR -> PA EXP PF")
+        print("Reconheci P7: FATOR -> INT")
+    elif prox_symb and prox_symb.type == 'PA':
+        print("Derivar P8: FATOR -> PA EXP PF")
         rec_term('PA')
-        print("Reconheci PA DE P8: FATOR -> PA EXP PF")
-    if prox_symb.type == 'PF': #acaba 
-        print("DERIVAR PF DE P8: FATOR -> PA EXP PF")
+        exp()
         rec_term('PF')
-        print("Reconheci PF DE P8: FATOR -> PA EXP PF")
+        print("Reconheci P8: FATOR -> PA EXP PF")
+    else:
+        parserError(prox_symb)
+
+def termo():
+    global prox_symb
+    if prox_symb and prox_symb.type in ['INT','PA']:
+        print("Derivar P4: TERMO -> FATOR TERMO2")
+        fator()
+        termo2()
+        print("Reconheci P4: TERMO -> FATOR TERMO2")
+    else:
+        parserError(prox_symb)
+
+def op_mult():
+    global prox_symb
+    if prox_symb and prox_symb.type == 'OP' and prox_symb.value in ['*','/']:
+        rec_term('OP')
+    else:
+        parserError(prox_symb)
+
+def termo2():
+    global prox_symb
+    if prox_symb and prox_symb.type == 'OP' and prox_symb.value in ['*','/']:
+        print("Derivar P5: TERMO2 -> OP_MULT FATOR TERMO2")
+        op_mult()
+        fator()
+        termo2()
+        print("Reconheci P5: TERMO2 -> OP_MULT FATOR TERMO2")
+    else:
+        print("Derivar P6: TERMO2 -> ε")
+        return
+
+def op_soma():
+    global prox_symb
+    if prox_symb and prox_symb.type == 'OP' and prox_symb.value in ['+','-']:
+        rec_term('OP')
+    else:
+        parserError(prox_symb)
+
+def exp2():
+    global prox_symb
+    if prox_symb and prox_symb.type == 'OP' and prox_symb.value in ['+','-']:
+        print("Derivar P2: EXP2 -> OP_SOMA TERMO EXP2")
+        op_soma()
+        termo()
+        exp2()
+        print("Reconheci P2: EXP2 -> OP_SOMA TERMO EXP2")
+    else:
+        print("Derivar P3: EXP2 -> ε")
+        return
+
 def exp():
     global prox_symb
-    if prox_symb.type == 'INT':
+    if prox_symb and prox_symb.type in ['INT','PA']:
+        print("Derivar P1: EXP -> TERMO EXP2")
+        termo()
+        exp2()
+        print("Reconheci P1: EXP -> TERMO EXP2")
+    else:
+        parserError(prox_symb)
 
+
+lexer.input("3 + 5 * (10 - 2)")
+prox_symb = lexer.token()
+exp()
